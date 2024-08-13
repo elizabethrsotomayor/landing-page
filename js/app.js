@@ -32,18 +32,21 @@ const myDocFrag = document.createDocumentFragment();
 // Retrieve ul nav from page
 const ul = document.querySelector('ul');
 
-// log each section id
-//sections.forEach((section) => console.log(section.id));
-//console.log(sections);
-
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
-
 function toggleActiveClass() {
   sections.forEach(addActive);
+}
+
+function getEventTarget(e){
+  const target = e.target.closest(".menu__link");
+
+  if(target){
+    scrollToID(target.innerText);
+  }
 }
 
 /**
@@ -75,15 +78,16 @@ function addActive(section) {
 
 // Scroll to anchor ID using scrollTO event
 function scrollToID(id) {
-    const element = document.querySelectorAll('[data-nav]')
-    console.log(element);
+    const sectionNum = "section" + id.slice(-1);
     
-    // const topPos = element.getBoundingClientRect().top + window.pageYOffset
+    const section = document.getElementById(sectionNum);
+    
+    const topPos = section.getBoundingClientRect().top + window.pageYOffset
 
-    // window.scrollTo({
-    //     top: topPos, // scroll so that the element is at the top of the view
-    //     behavior: 'smooth' // smooth scroll
-    // })
+    window.scrollTo({
+        top: topPos, // scroll so that the element is at the top of the view
+        behavior: 'smooth' // smooth scroll
+    })
 }
 
 /**
@@ -96,15 +100,7 @@ function scrollToID(id) {
 generateNav();
 
 // Scroll to section on link click
-// document.addEventListener("click", function(e){
-//   const target = e.target.closest(".menu__link"); // Or any other selector.
-
-//   if(target){
-//     // Do something with `target`.
-//     console.log(target.innerText);
-//     scrollToID(target.innerText);
-//   }
-// });
+document.addEventListener("click", (e) => getEventTarget(e));
 
 // Set sections as active
 document.addEventListener('scroll', toggleActiveClass);
