@@ -26,8 +26,11 @@
 // NodeList containing all sections
 const sections = document.querySelectorAll('section');
 
-// listHTML is an empty string to populate with list items
-let listHTML="";
+// Document Fragment to hold all <li> elements
+const myDocFrag = document.createDocumentFragment();
+
+// Retrieve ul nav from page
+const ul = document.querySelector('ul');
 
 // log each section id
 //sections.forEach((section) => console.log(section.id));
@@ -38,13 +41,10 @@ let listHTML="";
  * Start Helper Functions
  * 
 */
-function generateListItemHTML(item) {
-    return `<li class="menu__link">${item.getAttribute('data-nav')}</li>`;
-}
 
-sections.forEach((el) => {
-    listHTML += generateListItemHTML(el);
-})
+function toggleActiveClass() {
+  sections.forEach(addActive);
+}
 
 /**
  * End Helper Functions
@@ -53,9 +53,17 @@ sections.forEach((el) => {
 */
 
 // build the nav
-function buildNav(html) {
-    let navList = document.getElementById('navbar__list');
-    navList.insertAdjacentHTML('afterbegin', html);
+function generateNav() {
+  // Populate Fragment with each list item
+  for (let i = 0; i < sections.length; i++) {
+      const newElement = document.createElement('li');
+      newElement.classList.add("menu__link")
+      newElement.innerText = sections[i].getAttribute('data-nav');
+
+      myDocFrag.appendChild(newElement);
+  }
+
+  ul.appendChild(myDocFrag);
 }
 
 // Add class 'active' to section when near top of viewport
@@ -63,10 +71,6 @@ function addActive(section) {
   const { top } = section.getBoundingClientRect();
  
   section.classList.toggle('your-active-class', top >= 0);
-}
-
-function toggleActiveClass() {
-  sections.forEach(addActive);
 }
 
 // Scroll to anchor ID using scrollTO event
@@ -89,7 +93,7 @@ function scrollToID(id) {
 */
 
 // Build menu 
-buildNav(listHTML);
+generateNav();
 
 // Scroll to section on link click
 // document.addEventListener("click", function(e){
