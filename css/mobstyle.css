@@ -1,0 +1,9 @@
+.navbar__menu ul {
+    text-align: left;
+    width: 100%;
+}
+
+.navbar__menu ul li {
+    width: 18%;
+    font-size: 0.8rem;
+}

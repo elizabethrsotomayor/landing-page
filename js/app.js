@@ -32,8 +32,6 @@ const myDocFrag = document.createDocumentFragment();
 // Retrieve ul nav from page
 const ul = document.querySelector('ul');
 
-// console.log(ul);
-
 
 /**
  * End Global Variables
@@ -140,7 +138,7 @@ generateNav();
 
 // Scroll to section on link click
 document.addEventListener("click", (e) => getEventTarget(e));
-
+  
 // Set sections as active
 document.addEventListener('scroll', function(){
   setClassActive();
