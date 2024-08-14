@@ -51,6 +51,8 @@ function getEventTarget(e){
 }
 
 function isInViewport(section) {
+  console.log(section);
+  
     var rect = section.getBoundingClientRect();
     var html = document.documentElement;
     return (
@@ -70,8 +72,8 @@ function addHighlight(section) {
     // Holds the dataset of the current item in the li
     let navData = item.dataset.nav;
 
-    // If the dataset in the item matches the current section, apply highlight class, else remove it.
-    if (navData === curSection) {
+    // If the dataset in the item matches the current section and item is in viewport, apply highlight class, else remove it.
+    if (navData === curSection && isInViewport(item)) {
       item.classList.add("highlight");
     } else {
       item.classList.remove("highlight");
