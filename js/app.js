@@ -32,6 +32,9 @@ const myDocFrag = document.createDocumentFragment();
 // Retrieve ul nav from page
 const ul = document.querySelector('ul');
 
+// console.log(ul);
+
+
 /**
  * End Global Variables
  * Start Helper Functions
@@ -60,6 +63,24 @@ function isInViewport(section) {
     );
 }
 
+function addHighlight(section) {
+  let curSection = section.getAttribute('data-nav');
+  let li = document.getElementsByClassName('menu__link');
+
+  // Loop through the HTMLCollection of li elements
+  for (let item of li) {
+    // Holds the dataset of the current item in the li
+    let navData = item.dataset.nav;
+
+    // If the dataset in the item matches the current section, apply highlight class, else remove it.
+    if (navData === curSection) {
+      item.classList.add("highlight");
+    } else {
+      item.classList.remove("highlight");
+    }
+  }  
+}
+
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -72,6 +93,7 @@ function generateNav() {
   for (let i = 0; i < sections.length; i++) {
       const newElement = document.createElement('li');
       newElement.classList.add("menu__link")
+      newElement.dataset.nav = sections[i].getAttribute('data-nav');
       newElement.innerText = sections[i].getAttribute('data-nav');
 
       myDocFrag.appendChild(newElement);
@@ -81,21 +103,17 @@ function generateNav() {
 }
 
 // Add class 'active' to section when near top of viewport
-// function addActive(section) {
-//   const { top } = section.getBoundingClientRect();
- 
-//   section.classList.toggle('your-active-class', top >= 0);
-// }
-
 function setClassActive(){
     for (let i=0; i < sections.length; i++){
         if (isInViewport(sections[i])){
+            addHighlight(sections[i]);
             sections[i].classList.add("your-active-class");
         }else{
             sections[i].classList.remove("your-active-class");
         }
     }
 }
+
 
 // Scroll to anchor ID using scrollTO event
 function scrollToID(id) {
