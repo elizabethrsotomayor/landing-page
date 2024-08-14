@@ -49,6 +49,17 @@ function getEventTarget(e){
   }
 }
 
+function isInViewport(section) {
+    var rect = section.getBoundingClientRect();
+    var html = document.documentElement;
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || html.clientHeight) &&
+      rect.right <= (window.innerWidth || html.clientWidth)
+    );
+}
+
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -70,10 +81,20 @@ function generateNav() {
 }
 
 // Add class 'active' to section when near top of viewport
-function addActive(section) {
-  const { top } = section.getBoundingClientRect();
+// function addActive(section) {
+//   const { top } = section.getBoundingClientRect();
  
-  section.classList.toggle('your-active-class', top >= 0);
+//   section.classList.toggle('your-active-class', top >= 0);
+// }
+
+function setClassActive(){
+    for (let i=0; i < sections.length; i++){
+        if (isInViewport(sections[i])){
+            sections[i].classList.add("your-active-class");
+        }else{
+            sections[i].classList.remove("your-active-class");
+        }
+    }
 }
 
 // Scroll to anchor ID using scrollTO event
@@ -103,4 +124,6 @@ generateNav();
 document.addEventListener("click", (e) => getEventTarget(e));
 
 // Set sections as active
-document.addEventListener('scroll', toggleActiveClass);
+document.addEventListener('scroll', function(){
+  setClassActive();
+});
