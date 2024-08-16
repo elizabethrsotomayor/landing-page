@@ -14,3 +14,4 @@ My approach consisted of first adding a fourth section, then populating the `<ul
 - [StackOverflow data attribute on dynamically created elements](https://stackoverflow.com/questions/43696733/data-attribute-on-dynamically-created-elements)
 - [Github Gist to check if element is in viewport](https://gist.github.com/jjmu15/8646226)
 - [MDN scrollTo method](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo)
+- [StackOverflow Where should I put script tags in HTML markup?](https://stackoverflow.com/questions/436411/where-should-i-put-script-tags-in-html-markup)

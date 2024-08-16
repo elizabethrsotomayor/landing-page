@@ -50,9 +50,7 @@ function getEventTarget(e){
   }
 }
 
-function isInViewport(section) {
-  console.log(section);
-  
+function isInViewport(section) {  
     var rect = section.getBoundingClientRect();
     var html = document.documentElement;
     return (
@@ -114,7 +112,6 @@ function setClassActive(){
     }
 }
 
-
 // Scroll to anchor ID using scrollTO event
 function scrollToID(id) {
     const sectionNum = "section" + id.slice(-1);
@@ -134,14 +131,15 @@ function scrollToID(id) {
  * Begin Events
  * 
 */
-
-// Build menu 
-generateNav();
-
-// Scroll to section on link click
-document.addEventListener("click", (e) => getEventTarget(e));
+document.addEventListener("DOMContentLoaded", (event) => {
+  // Build menu 
+  generateNav();
   
-// Set sections as active
-document.addEventListener('scroll', function(){
-  setClassActive();
+  // Scroll to section on link click
+  document.addEventListener("click", (e) => getEventTarget(e));
+  
+  // Set sections as active
+  document.addEventListener('scroll', function(){
+    setClassActive();
+  });
 });
