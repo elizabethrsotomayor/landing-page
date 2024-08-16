@@ -44,15 +44,16 @@ function toggleActiveClass() {
 
 function getEventTarget(e){
   const target = e.target.closest(".menu__link");
-
+  
   if(target){
     scrollToID(target.innerText);
   }
 }
 
-function isInViewport(section) {  
+function isInViewport(section) {    
     var rect = section.getBoundingClientRect();
     var html = document.documentElement;
+    
     return (
       rect.top >= 0 &&
       rect.left >= 0 &&
@@ -117,8 +118,9 @@ function scrollToID(id) {
     const sectionNum = "section" + id.slice(-1);
     
     const section = document.getElementById(sectionNum);
+    console.log(section);
     
-    const topPos = section.getBoundingClientRect().top + window.pageYOffset
+    const topPos = section.getBoundingClientRect().top + window.pageYOffset - 2
 
     window.scrollTo({
         top: topPos, // scroll so that the element is at the top of the view
