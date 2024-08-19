@@ -128,20 +128,30 @@ function scrollToID(id) {
     })
 }
 
+function buildPage() {
+  // Build menu 
+    generateNav();
+    
+    // Scroll to section on link click
+    document.addEventListener("click", (e) => getEventTarget(e));
+    
+    // Set sections as active
+    document.addEventListener('scroll', function(){
+      setClassActive();
+    });
+}
+
 /**
  * End Main Functions
  * Begin Events
  * 
 */
-document.addEventListener("DOMContentLoaded", (event) => {
-  // Build menu 
-  generateNav();
-  
-  // Scroll to section on link click
-  document.addEventListener("click", (e) => getEventTarget(e));
-  
-  // Set sections as active
-  document.addEventListener('scroll', function(){
-    setClassActive();
+if (document.readyState === "loading") {
+  // Loading hasn't finished yet
+  document.addEventListener("DOMContentLoaded", (event) => {
+    buildPage();
   });
-});
+} else {
+  // `DOMContentLoaded` has already fired
+  buildPage();
+}
